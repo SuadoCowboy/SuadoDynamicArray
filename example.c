@@ -2,27 +2,27 @@
 #include <time.h>
 
 #include "sda.h"
-
-typedef struct Object {
-	unsigned short value;
-} Object;
-
-SDA_DEFINE_ARRAY_HEADER(Object, obj_array, objarr_, unsigned short)
-SDA_DEFINE_ARRAY_IMPLEMENTATION(Object, obj_array, objarr_, unsigned short)
+#include "object.h"
 
 void printUsage(const obj_array* pArray) {
-	printf("Usage:\t\t%d/%d\n\n", pArray->size, pArray->capacity);
+	printf("Usage: %d/%d\n\n", pArray->size, pArray->capacity);
 }
 
 int main() {
-	printf("objarr_init(3)\n");
-	obj_array objects = objarr_init(3);
+	printf("objarr_init(2)\n");
+	obj_array objects = objarr_init(2);
 	printUsage(&objects);
 
+	// printf("objarr_reserve(2)\n");
+	// objarr_reserve(&objects, 2);
+	// printUsage(&objects);
+
 	Object object;
-	for (unsigned short i = 0; i < 3; ++i) {
+	printf("objarr_push() x4\n");
+	for (unsigned short i = 0; i < 4; ++i) {
 		object.value = i;
 		objarr_push(&objects, &object);
+		printUsage(&objects);
 	}
 
 	// printf("objarr_reserve(2)\n");
@@ -47,13 +47,18 @@ int main() {
 	// printf("objarr_fit_capacity_to_size()\n");
 	// objarr_fit_capacity_to_size(&objects);
 	// printUsage(&objects);
-	
+
 	// printf("objarr_get(0)->value = 32;\n");
 	// objarr_get(&objects, 0)->value = 32;
 	// printUsage(&objects);
 
 	// printf("objarr_free()\n");
 	// objarr_free(&objects);
+	// printf("Data:\t\t%p\n", objects.pData);
+	// printUsage(&objects);
+
+	// printf("objarr_clear()\n");
+	// objarr_clear(&objects);
 	// printf("Data:\t\t%p\n", objects.pData);
 	// printUsage(&objects);
 
