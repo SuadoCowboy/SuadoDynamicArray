@@ -24,7 +24,7 @@ name functionNamePrefix##init(sizeType initialCapacity) { \
 	array.pData = initialCapacity == 0? NULL : malloc(initialCapacity * sizeof(type)); \
 	return array; \
 } \
-functionPrefix void functionNamePrefix##push(name *pArray, const type *pValue) { \
+void functionNamePrefix##push(name *pArray, const type *pValue) { \
 	if (pArray->size == pArray->capacity) { \
 		pArray->capacity++; \
 		if (pArray->pData == NULL) \
@@ -34,7 +34,7 @@ functionPrefix void functionNamePrefix##push(name *pArray, const type *pValue) {
 	} \
 	pArray->pData[pArray->size++] = *pValue; \
 } \
-functionPrefix void functionNamePrefix##free(name *pArray) { \
+void functionNamePrefix##free(name *pArray) { \
 	if (pArray->pData == NULL) return; \
 	free(pArray->pData); \
 	pArray->pData = NULL; \
